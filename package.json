@@ -1,0 +1,26 @@
+{
+  "name": "loopback-connector-mailgun",
+  "version": "0.0.1",
+  "description": "Loopback connector module which allow to send emails via Mailgun",
+  "main": "index.js",
+  "keywords": [
+    "loopback",
+    "mailgun",
+    "connector"
+  ],
+  "author": "Michael Bouclas <mbouclas@gmail.com> (http://net-tomorrow.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "lodash": "^4.6.1",
+    "mailcomposer": "^3.6.3",
+    "mailgun": "^0.5.0",
+    "mailgun-js": "^0.7.7"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/mbouclas/loopback-connector-mailgun",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mbouclas/loopback-connector-mailgun.git"
+  }
+}
