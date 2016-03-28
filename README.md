@@ -50,7 +50,12 @@ Basic option same as built in Loopback. Returns a Promise
         from: "fron@from.com",
         subject: "subject",
         text: "text message",
-        html: "html <b>message</b>"
+        html: "html <b>message</b>",
+        attachments : [path.resolve('../client/images/an-image.jpg'))]
     })
     .then(function(response){})
     .catch(function(err){});
+
+###quick note on attachments
+Refer to Mailgun documentation on limitations concerning attachments.
+  The attachments property can be either an array or a string.
