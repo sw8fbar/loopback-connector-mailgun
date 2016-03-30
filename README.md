@@ -51,7 +51,7 @@ Basic option same as built in Loopback. Returns a Promise
         subject: "subject",
         text: "text message",
         html: "html <b>message</b>",
-        attachments : [path.resolve('../client/images/an-image.jpg'))],
+        attachments : [path.resolve('../client/images/an-image.jpg')],
         var : {
             myVar1 : 'a custom value'
         },
@@ -62,6 +62,35 @@ Basic option same as built in Loopback. Returns a Promise
     .then(function(response){})
     .catch(function(err){});
 
-###quick note on attachments
-Refer to Mailgun documentation on limitations concerning attachments.
-  The attachments property can be either an array or a string.
+###Example of attaching a file stream
+In this case we will pass a file stream as an attachment. Note
+the structure of the attachment object, every property is required
+by mailgun in order to send the attachment. Omitting properties will
+cause mailgun to drop your attachment, the message will be delivered though
+
+      var path = require('path');
+      var mime = require('mime');
+      var file = path.resolve('../client/images/an-image.jpg');
+      var fileStream = fs.createReadStream(file);
+      var fileStat = fs.statSync(file);
+      var attachment = {
+          data: fileStream,
+          filename: path.basename(file),
+          knownLength: fileStat.size,
+          contentType: mime.lookup(file)//REQUIRED, by omitting this, mailgun will not send your attachment
+      };
+
+      loopback.Email.send({
+          to: "to@to.com",
+          from: "from@from.com",
+          subject: "subject",
+          text: "text message",
+          html: "html <b>message</b>",
+          attachments : [attachment]
+      })
+      .then(function(response){})
+      .catch(function(err){});
+
+  ###quick note on attachments
+  Refer to Mailgun documentation on limitations concerning attachments.
+    The attachments property can be either an array of strings or buffers or a string.
